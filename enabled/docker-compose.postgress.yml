@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ${CONF_DIR}/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - diun.enable=true
+      - diun.watch_repo=true
+    shm_size: 256M

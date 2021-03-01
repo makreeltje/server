@@ -1,0 +1,53 @@
+name: Deploy server
+
+on:
+  push:
+    branches: 
+    - main
+
+env:
+  TARGET_DIRECTORY: /opt/docker/compose/media-server
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: SSH SCP | Copy container configurations
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        port: ${{ secrets.SSH_PORT }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: enabled/docker-compose.*.yml
+        target: ${{ env.TARGET_DIRECTORY }}
+        strip_components: 1
+        rm: true
+    - name: SSH | Start containers
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        port: ${{ secrets.SSH_PORT }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        script: |
+          cd ${{ env.TARGET_DIRECTORY }}
+          
+          echo 'PGID=${{ secrets.PGID }}' >> .env
+          echo 'PUID=${{ secrets.PUID }}' >> .env
+          echo 'TZ=${{ secrets.TZ }}' >> .env
+          echo 'CONF_DIR=${{ secrets.CONF_DIR }}' >> .env
+          echo 'CLOUD_DIR=${{ secrets.CLOUD_DIR }}' >> .env
+          echo 'DB_CONN=${{ secrets.DB_CONN }}' >> .env
+          echo 'DB_HOST=${{ secrets.DB_HOST }}' >> .env
+          echo 'DB_PORT=${{ secrets.DB_PORT }}' >> .env
+          echo 'DB_STATPING_DATABASE=${{ secrets.DB_STATPING_DATABASE }}' >> .env
+          echo 'DB_STATPING_USER=${{ secrets.DB_STATPING_USER }}' >> .env
+          echo 'DB_STATPING_PASS=${{ secrets.DB_STATPING_PASS }}' >> .env
+          echo 'DIUN_WEBHOOK_URL=${{ secrets.DIUN_WEBHOOK_URL }}' >> .env
+          echo 'WATCHTOWER_WEBHOOK_URL=${{ secrets.WATCHTOWER_WEBHOOK_URL }}' >> .env
+          echo 'POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}' >> .env
+          
+          docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d
