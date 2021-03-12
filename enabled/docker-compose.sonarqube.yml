@@ -11,6 +11,8 @@ services:
     volumes:
       - ${CONF_DIR}/sonarqube/data:/opt/sonarqube/data
       - ${CONF_DIR}/sonarqube/extensions:/opt/sonarqube/extensions
+    expose:
+      - 9000
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - diun.enable=true
