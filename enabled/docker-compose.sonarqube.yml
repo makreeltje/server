@@ -8,17 +8,11 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+      - "sonar.jdbc.username=${SONARQUBE_JDBC_USERNAME}"
+      - "sonar.jdbc.password=${SONARQUBE_JDBC_PASSWORD}"
     volumes:
       - ${CONF_DIR}/sonarqube/data:/opt/sonarqube/data
       - ${CONF_DIR}/sonarqube/extensions:/opt/sonarqube/extensions
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
-        delay: 10s
-      resources:
-        limits:
-          memory: 2.5G
     expose:
       - 9000
     labels:

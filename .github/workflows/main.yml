@@ -49,5 +49,7 @@ jobs:
           echo 'DIUN_WEBHOOK_URL=${{ secrets.DIUN_WEBHOOK_URL }}' >> .env
           echo 'WATCHTOWER_WEBHOOK_URL=${{ secrets.WATCHTOWER_WEBHOOK_URL }}' >> .env
           echo 'POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}' >> .env
+          echo 'SONARQUBE_JDBC_USERNAME=${{ secrets.SONARQUBE_JDBC_USERNAME }}' >> .env
+          echo 'SONARQUBE_JDBC_PASSWORD=${{ secrets.SONARQUBE_JDBC_PASSWORD }}' >> .env
           
           docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d
