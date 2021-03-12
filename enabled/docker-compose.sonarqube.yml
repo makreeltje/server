@@ -8,6 +8,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+      - "sonar.jdbc.url=jdbc:postgresql://postgres:5432/sonarqube"
       - "sonar.jdbc.username=${SONARQUBE_JDBC_USERNAME}"
       - "sonar.jdbc.password=${SONARQUBE_JDBC_PASSWORD}"
     volumes:
