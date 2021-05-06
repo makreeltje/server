@@ -4,7 +4,7 @@ services:
     image: ghcr.io/linuxserver/openvpn-as
     container_name: openvpn-as
     restart: unless-stopped
-    cap-add:
+    cap_add:
       - NET_ADMIN
     environment:
       - PUID=${PUID}
