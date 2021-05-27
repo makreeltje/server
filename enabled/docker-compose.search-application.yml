@@ -2,7 +2,7 @@ version: "3.7"
 services:
   search-application:
     image: rick043/search-application:latest
-    container_name: case-exporter
+    container_name: search-application
     restart: unless-stopped
     environment:
       - PUID=${PUID}
