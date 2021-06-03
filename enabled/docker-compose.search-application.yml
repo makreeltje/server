@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   search-application:
-    image: rick043/search-application:0.2
+    image: rick043/search-application:0.5
     container_name: search-application
     restart: unless-stopped
     environment:
