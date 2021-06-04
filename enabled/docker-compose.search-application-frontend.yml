@@ -1,15 +1,15 @@
 version: "3.7"
 services:
-  case-exporter:
-    image: bstijnb/case-exporter:0.5
-    container_name: case-exporter
+  search-application-frontend:
+    image: rick043/search-application-frontend:0.3
+    container_name: search-application-frontend
     restart: unless-stopped
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
     expose:
-      - 8080
+      - 80
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - diun.enable=true
