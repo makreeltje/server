@@ -51,5 +51,9 @@ jobs:
           echo 'POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}' >> .env
           echo 'SONARQUBE_JDBC_USERNAME=${{ secrets.SONARQUBE_JDBC_USERNAME }}' >> .env
           echo 'SONARQUBE_JDBC_PASSWORD=${{ secrets.SONARQUBE_JDBC_PASSWORD }}' >> .env
+          echo 'MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}' >> .env
+          echo 'MYSQL_USER=${{ secrets.MYSQL_USER }}' >> .env
+          echo 'MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}' >> .env
+          echo 'MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}' >> .env
           
           docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d

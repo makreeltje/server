@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  case-exporter:
+    image: bstijnb/case-exporter:0.5
+    container_name: case-exporter
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    expose:
+      - 8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - diun.enable=true
+      - diun.watch_repo=true

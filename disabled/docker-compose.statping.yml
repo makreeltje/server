@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  statping:
+    container_name: statping
+    image: statping/statping:latest
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DB_CONN=${DB_CONN}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_STATPING_DATABASE}
+      - DB_USER=${DB_STATPING_USER}
+      - DB_PASS=${DB_STATPING_PASS}
+    volumes:
+      - ${CONF_DIR}/statping/app:/app
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - diun.enable=true
+      - diun.watch_repo=true
