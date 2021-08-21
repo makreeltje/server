@@ -57,3 +57,4 @@ jobs:
           echo 'MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}' >> .env
           
           docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d
+          docker restart reverse-proxy
