@@ -11,9 +11,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${CONF_DIR}/homeassistant/config:/config
-      - ${CONF_DIR}/homeassistant/lib:/usr/lib
       - /etc/localtime:/etc/localtime:ro
-      - ${CONF_DIR}/homeassistant/shared:/shared
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - diun.enable=true
