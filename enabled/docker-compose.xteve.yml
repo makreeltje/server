@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  diun:
+  xteve:
     container_name: xteve
     image: alturismo/xteve
     restart: unless-stopped
