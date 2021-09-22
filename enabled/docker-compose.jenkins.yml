@@ -15,7 +15,6 @@ services:
     volumes:
       - ${CONF_DIR}/jenkins/config:/var/jenkins_home
       - ${CONF_DIR}/jenkins/certs:/certs/client:ro
-      - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
     expose:
       - 8080
