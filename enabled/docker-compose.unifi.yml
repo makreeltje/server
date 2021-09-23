@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  unifi:
+    container_name: unifi
+    image: ghcr.io/linuxserver/unifi-controller
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MEM_LIMIT=1024M
+      - MEM_STARTUP=1024M
+    volumes:
+      - ${CONF_DIR}/unifi/config:/config
+    ports:
+      - 3478:3478/udp
+      - 10001:10001/udp
+      - 9080:8080
+      - 9443:8443
+      - 1900:1900/udp #optional
+      - 8843:8843 #optional
+      - 8880:8880 #optional
+      - 6789:6789 #optional
+      - 5514:5514/udp #optional
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - diun.enable=true
+      - diun.watch_repo=true
