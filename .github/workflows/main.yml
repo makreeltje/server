@@ -55,6 +55,7 @@ jobs:
           echo 'MYSQL_USER=${{ secrets.MYSQL_USER }}' >> .env
           echo 'MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}' >> .env
           echo 'MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}' >> .env
+          echo 'ASF_CRYPTKEY=${{ secrets.ASF_CRYPTKEY }}' >> .env
           
           docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d
           docker restart reverse-proxy
