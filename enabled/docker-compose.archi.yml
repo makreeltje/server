@@ -1,18 +1,19 @@
 version: "3.7"
 services:
-  nextcloud:
-    image: linuxserver/nextcloud:latest
-    container_name: nextcloud
+  archi:
+    image: justarchi/archisteamfarm:latest
+    container_name: archi
     restart: unless-stopped
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+      - ASF_CRYPTKEY=${ASF_CRYPTKEY}
+      - ASF_ARGS=--no-config-migrate
     volumes:
-      - ${CONF_DIR}/nextcloud/config:/config
-      - ${CLOUD_DIR}:/data
+      - ${CONF_DIR}/archi/config:/app/config
     expose:
-      - 443
+      - 1242
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - diun.enable=true
