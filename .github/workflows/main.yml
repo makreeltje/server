@@ -58,4 +58,3 @@ jobs:
           echo 'ASF_CRYPTKEY=${{ secrets.ASF_CRYPTKEY }}' >> .env
           
           docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d
-          docker restart reverse-proxy
