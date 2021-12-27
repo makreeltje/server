@@ -24,8 +24,6 @@ services:
       - traefik_proxy
     expose:
       - 1242
-    ports:
-      - 1242:1242
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.archi-rtr.entrypoints=https"
