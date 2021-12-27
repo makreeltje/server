@@ -6,7 +6,7 @@ on:
     - main
 
 env:
-  TARGET_DIRECTORY: /opt/docker/compose/server
+  TARGET_DIRECTORY: /opt/compose/server
 
 jobs:
   deploy:

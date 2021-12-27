@@ -12,11 +12,16 @@ services:
       - ASF_ARGS=--no-config-migrate
     volumes:
       - ${CONF_DIR}/archi/config:/app/config
+    networks:
+      - traefik_proxy
     expose:
       - 1242
     ports:
       - 1242:1242
     labels:
-      - com.centurylinklabs.watchtower.enable=true
-      - diun.enable=true
-      - diun.watch_repo=true
+      - "traefik.enable=true"
+      - "traefik.http.routers.archi-rtr.entrypoints=https"
+      - "traefik.http.routers.archi-rtr.rule=Host(`archi.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.traefik-rtr.middlewares=chain-basic-auth@file"
+      - "traefik.http.routers.archi-rtr.service=archi-svc"
+      - "traefik.http.services.archi-svc.loadbalancer.server.port=1242"
