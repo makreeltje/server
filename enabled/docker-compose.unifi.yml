@@ -1,4 +1,12 @@
 version: "3.7"
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+  default:
+    driver: bridge
+
 services:
   unifi:
     container_name: unifi
