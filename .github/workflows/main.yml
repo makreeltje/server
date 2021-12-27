@@ -56,5 +56,7 @@ jobs:
           echo 'MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}' >> .env
           echo 'MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}' >> .env
           echo 'ASF_CRYPTKEY=${{ secrets.ASF_CRYPTKEY }}' >> .env
+          echo 'MEELSNET_DOMAIN=${{ secrets.MEELSNET_DOMAIN }}' >> .env
+          echo 'CINEMON_DOMAIN=${{ secrets.CINEMON_DOMAIN }}' >> .env
           
           docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d
