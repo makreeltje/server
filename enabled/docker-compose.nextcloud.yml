@@ -24,9 +24,13 @@ services:
     expose:
       - 443
     labels:
-      - "traefik.tcp.routers.nextcloud-tcp.entrypoints=https"
-      - "traefik.tcp.routers.nextcloud-tcp.rule=HostSNI(`cloud.$MEELSNET_DOMAIN`)"
-      - "traefik.tcp.routers.nextcloud-tcp.tls=true"
-      - "traefik.tcp.routers.nextcloud-tcp.tls.passthrough=true"
-      - "traefik.tcp.routers.nextcloud-tcp.service=nextcloud-tcp-svc"
-      - "traefik.tcp.services.nextcloud-tcp-svc.loadbalancer.server.port=443"
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.nextcloud.entrypoints=https"
+      - "traefik.http.routers.nextcloud.rule=Host(`cloud.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.nextcloud.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.nextcloud.middlewares=chain-no-auth@file" # No Authentication
+      ## HTTP Services
+      - "traefik.http.routers.nextcloud.service=nextcloud"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
