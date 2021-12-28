@@ -24,6 +24,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.adminer-rtr.entrypoints=https"
       - "traefik.http.routers.adminer-rtr.rule=Host(`adminer.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.adminer-rtr.tls=true"
       - "traefik.http.routers.adminer-rtr.middlewares=chain-basic-auth@file"
       - "traefik.http.routers.adminer-rtr.service=adminer-svc"
       - "traefik.http.services.adminer-svc.loadbalancer.server.port=8080"
