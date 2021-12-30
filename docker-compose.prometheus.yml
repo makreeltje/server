@@ -1,0 +1,92 @@
+version: "3.8"
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+  default:
+    driver: bridge
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONF_DIR}/prometheus:/etc/prometheus
+    networks:
+      - traefik_proxy
+    expose:
+      - 9090
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus-rtr.entrypoints=https"
+      - "traefik.http.routers.prometheus-rtr.rule=Host(`prometheus.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.prometheus-rtr.tls=true"
+      - "traefik.http.routers.prometheus-rtr.middlewares=chain-basic-auth@file"
+      - "traefik.http.routers.prometheus-rtr.service=prometheus-svc"
+      - "traefik.http.services.prometheus-svc.loadbalancer.server.port=9090"
+
+    depends_on:
+      - node-exporter
+      - cadvisor
+  
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    networks:
+      - traefik_proxy
+    expose:
+      - 9100
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - traefik_proxy
+    expose:
+      - 8080
+  # The Alertmanager handles alerts sent by client applications such as the Prometheus server. 
+  # It takes care of deduplicating, grouping, and routing them to the correct receiver integration such as email, PagerDuty, or OpsGenie. 
+  # It also takes care of silencing and inhibition of alerts.
+  # alertmanager:
+  #   image: prom/alertmanager:v0.21.0
+  #   container_name: alertmanager
+  #   cpus: 1
+  #   mem_limit: 1G
+  #   command:
+  #   - --config.file=/etc/alertmanager/config.yml
+  #   - --storage.path=/alertmanager
+  #   volumes:
+  #   - /server/alertmanager/:/etc/alertmanager/
+  #   expose:
+  #   - 9093
+  #   labels:
+  #   - com.centurylinklabs.watchtower.enable=true
+  #   - diun.enable=true
+  #   - diun.watch_repo=true
