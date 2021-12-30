@@ -29,9 +29,9 @@ services:
       - 3000
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.archi-rtr.entrypoints=https"
-      - "traefik.http.routers.archi-rtr.rule=Host(`grafana.$MEELSNET_DOMAIN`)"
-      - "traefik.http.routers.archi-rtr.tls=true"
-      - "traefik.http.routers.archi-rtr.middlewares=chain-basic-auth@file"
-      - "traefik.http.routers.archi-rtr.service=archi-svc"
-      - "traefik.http.services.archi-svc.loadbalancer.server.port=3000"
+      - "traefik.http.routers.grafana-rtr.entrypoints=https"
+      - "traefik.http.routers.grafana-rtr.rule=Host(`grafana.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.grafana-rtr.tls=true"
+      - "traefik.http.routers.grafana-rtr.middlewares=chain-basic-auth@file"
+      - "traefik.http.routers.grafana-rtr.service=grafana-svc"
+      - "traefik.http.services.grafana-svc.loadbalancer.server.port=3000"
