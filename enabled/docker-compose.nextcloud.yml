@@ -46,14 +46,17 @@ services:
     ports:
       - 8081:80
     volumes:
-      - ${CONF_DIR}/nextcloud/custom_apps:/var/www/html/custom_apps
-      - ${CONF_DIR}/nextcloud/config:/var/www/html/config
-      - ${CLOUD_DIR}:/var/www/html/data
+      - ${CONF_DIR}/nextcloud/config:/var/www/html
     environment:
       REDIS_HOST: nc-redis
       PUID: ${PUID}
       PGID: ${PGID}
       TZ: ${TZ}
+      NEXTCLOUD_DATA_DIR: ${CLOUD_DIR}
+      POSTGRES_HOST: postgres:5432
+      POSTGRES_DB: ${NEXTCLOUD_DB}
+      POSTGRES_USER: ${NEXTCLOUD_USER}
+      POSTGRES_PASSWORD: ${NEXTCLOUD_PASSWORD}
 
   nc-redis:
     image: redis:6.2-alpine

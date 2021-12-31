@@ -58,5 +58,8 @@ jobs:
           echo 'ASF_CRYPTKEY=${{ secrets.ASF_CRYPTKEY }}' >> .env
           echo 'MEELSNET_DOMAIN=${{ secrets.MEELSNET_DOMAIN }}' >> .env
           echo 'CINEMON_DOMAIN=${{ secrets.CINEMON_DOMAIN }}' >> .env
+          echo 'NEXTCLOUD_DB=${{ secrets.NEXTCLOUD_DB }}' >> .env
+          echo 'NEXTCLOUD_USER=${{ secrets.NEXTCLOUD_USER }}' >> .env
+          echo 'NEXTCLOUD_PASSWORD=${{ secrets.NEXTCLOUD_PASSWORD }}' >> .env
           
           docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d
