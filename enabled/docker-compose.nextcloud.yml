@@ -46,9 +46,9 @@ services:
     ports:
       - 8081:80
     volumes:
-      - ${CONF_DIR}/nextcloud/config:/config
-      - ${CONF_DIR}/nextcloud/html:/var/www/html
-      - ${CLOUD_DIR}:/data
+      - ${CONF_DIR}/nextcloud/custom_apps:/var/www/html/custom_apps
+      - ${CONF_DIR}/nextcloud/config:/var/www/html/config
+      - ${CLOUD_DIR}:/var/www/html/data
     environment:
       REDIS_HOST: nc-redis
       PUID: ${PUID}
