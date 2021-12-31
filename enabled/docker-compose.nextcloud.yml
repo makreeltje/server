@@ -8,29 +8,59 @@ networks:
     driver: bridge
 
 services:
+  # nextcloud:
+  #   image: linuxserver/nextcloud:latest
+  #   container_name: nextcloud
+  #   restart: unless-stopped
+  #   environment:
+  #     - PUID=${PUID}
+  #     - PGID=${PGID}
+  #     - TZ=${TZ}
+  #   volumes:
+  #     - ${CONF_DIR}/nextcloud/config:/config
+  #     - ${CLOUD_DIR}:/data
+  #   networks:
+  #     - traefik_proxy
+  #   expose:
+  #     - 443
+  #   labels:
+  #     - "traefik.enable=true"
+  #     ## HTTP Routers
+  #     - "traefik.http.routers.nextcloud.entrypoints=https"
+  #     - "traefik.http.routers.nextcloud.rule=Host(`cloud.$MEELSNET_DOMAIN`)"
+  #     - "traefik.http.routers.nextcloud.tls=true"
+  #     ## Middlewares
+  #     - "traefik.http.routers.nextcloud.middlewares=chain-no-auth@file" # No Authentication
+  #     ## HTTP Services
+  #     - "traefik.http.routers.nextcloud.service=nextcloud"
+  #     - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+
+  # Nextcloud Docker Application
   nextcloud:
-    image: linuxserver/nextcloud:latest
+    image: nextcloud:latest
     container_name: nextcloud
+    hostname: nextcloud
     restart: unless-stopped
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONF_DIR}/nextcloud/config:/config
-      - ${CLOUD_DIR}:/data
     networks:
       - traefik_proxy
-    expose:
-      - 443
-    labels:
-      - "traefik.enable=true"
-      ## HTTP Routers
-      - "traefik.http.routers.nextcloud.entrypoints=https"
-      - "traefik.http.routers.nextcloud.rule=Host(`cloud.$MEELSNET_DOMAIN`)"
-      - "traefik.http.routers.nextcloud.tls=true"
-      ## Middlewares
-      - "traefik.http.routers.nextcloud.middlewares=chain-no-auth@file" # No Authentication
-      ## HTTP Services
-      - "traefik.http.routers.nextcloud.service=nextcloud"
-      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+    ports:
+      - 8081:80
+    volumes:
+      - ${CONF_DIR}/nextcloud/config:/config
+      - ${CONF_DIR}/nextcloud/html:/var/www/html
+      - ${CLOUD_DIR}:/data
+    environment:
+      REDIS_HOST: nc-redis
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+
+  nc-redis:
+    image: redis:6.2-alpine
+    container_name: nc-redis
+    hostname: nc-redis
+    restart: unless-stopped
+    networks:
+      - traefik_proxy
+    volumes:
+      - ${CONF_DIR}/nextcloud/redis:/data
