@@ -41,13 +41,13 @@ services:
     container_name: nextcloud
     hostname: nextcloud
     restart: unless-stopped
+    user: "${PUID}:${PGID}"
     networks:
       - traefik_proxy
     ports:
       - 8081:80
     volumes:
       - ${CONF_DIR}/nextcloud/config:/var/www/html
-      - ${CLOUD_DIR}:/data
     environment:
       REDIS_HOST: nc-redis
       PUID: ${PUID}
