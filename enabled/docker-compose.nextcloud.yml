@@ -32,6 +32,8 @@ services:
       - traefik_proxy
     expose:
       - 80
+    ports:
+      - 8081:80
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nextcloud-rtr.entrypoints=https"
