@@ -27,9 +27,9 @@ services:
       - 8080
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dozzle-rtr.entrypoints=https"
-      - "traefik.http.routers.dozzle-rtr.rule=Host(`dozzle.$MEELSNET_DOMAIN`) || Host(`logs.$MEELSNET_DOMAIN`)"
-      - "traefik.http.routers.dozzle-rtr.tls=true"
-      - "traefik.http.routers.dozzle-rtr.middlewares=chain-basic-auth@file"
-      - "traefik.http.routers.dozzle-rtr.service=dozzle-svc"
-      - "traefik.http.services.dozzle-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.dozzle.entrypoints=https"
+      - "traefik.http.routers.dozzle.rule=Host(`dozzle.$MEELSNET_DOMAIN`) || Host(`logs.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.dozzle.tls=true"
+      - "traefik.http.routers.dozzle.middlewares=chain-basic-auth@file"
+      - "traefik.http.routers.dozzle.service=dozzle"
+      - "traefik.http.services.dozzle.loadbalancer.server.port=8080"

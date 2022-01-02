@@ -36,12 +36,12 @@ services:
       - 8081:80
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nextcloud-rtr.entrypoints=https"
-      - "traefik.http.routers.nextcloud-rtr.rule=Host(`cloud.$MEELSNET_DOMAIN`)"
-      - "traefik.http.routers.nextcloud-rtr.tls=true"
-      - "traefik.http.routers.nextcloud-rtr.middlewares=chain-nextcloud@file"
-      - "traefik.http.routers.nextcloud-rtr.service=nextcloud-svc"
-      - "traefik.http.services.nextcloud-svc.loadbalancer.server.port=80"
+      - "traefik.http.routers.nextcloud.entrypoints=https"
+      - "traefik.http.routers.nextcloud.rule=Host(`cloud.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.nextcloud.tls=true"
+      - "traefik.http.routers.nextcloud.middlewares=chain-nextcloud@file"
+      - "traefik.http.routers.nextcloud.service=nextcloud"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
 
   nc-redis:
     image: redis:6.2-alpine
