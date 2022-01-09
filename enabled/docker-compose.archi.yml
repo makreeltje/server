@@ -29,6 +29,6 @@ services:
       - "traefik.http.routers.archi.entrypoints=https"
       - "traefik.http.routers.archi.rule=Host(`archi.$MEELSNET_DOMAIN`)"
       - "traefik.http.routers.archi.tls=true"
-      - "traefik.http.routers.archi.middlewares=chain-basic-auth@file"
+      - "traefik.http.routers.archi.middlewares=chain-oauth@file"
       - "traefik.http.routers.archi.service=archi"
       - "traefik.http.services.archi.loadbalancer.server.port=1242"

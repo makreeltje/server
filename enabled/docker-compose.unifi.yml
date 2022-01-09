@@ -18,8 +18,12 @@ services:
       - TZ=${TZ}
       - MEM_LIMIT=1024M
       - MEM_STARTUP=1024M
+      - RUNAS_UID0="false"
+      - BIND_PRIV="false"
     volumes:
       - ${CONF_DIR}/unifi/config:/config
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik_proxy
     security_opt:
@@ -33,5 +37,3 @@ services:
       #- "8081:8081"
       #- "8843:8843"
       #- "8880:8880"
-    expose:
-      - 8443
