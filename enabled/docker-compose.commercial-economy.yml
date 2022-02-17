@@ -23,7 +23,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.commercial-economy.entrypoints=https"
-      - "traefik.http.routers.commercial-economy.rule=Host(`s6-commercial-economy.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.commercial-economy.rule=Host(`s6-commercialeconomy.$MEELSNET_DOMAIN`)"
       - "traefik.http.routers.commercial-economy.tls=true"
       - "traefik.http.routers.commercial-economy.middlewares=chain-no-auth@file"
       - "traefik.http.routers.commercial-economy.service=commercial-economy"
