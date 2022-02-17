@@ -24,7 +24,8 @@ services:
     expose:
       - 3000
     ports:
-      - 53:53
+      - 53:53/udp
+      - 53:53/tcp
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.adguard.entrypoints=https"
