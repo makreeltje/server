@@ -21,3 +21,6 @@ services:
     ports:
       - 5432:5432
     shm_size: 256M
+    logging:
+      options:
+        max-size: 50m
