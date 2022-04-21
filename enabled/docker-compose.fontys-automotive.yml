@@ -1,0 +1,30 @@
+version: "3.7"
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+  default:
+    driver: bridge
+
+services:
+  fontys-automotive:
+    container_name: fontys-automotive
+    image: lucjans26/fontys-automotive:latest
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - traefik_proxy
+    expose:
+      - 8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fontys-automotive.entrypoints=https"
+      - "traefik.http.routers.fontys-automotive.rule=Host(`fontys-automotive.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.fontys-automotive.tls=true"
+      - "traefik.http.routers.fontys-automotive.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.fontys-automotive.service=fontys-automotive"
+      - "traefik.http.services.fontys-automotive.loadbalancer.server.port=8080"
