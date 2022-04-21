@@ -10,7 +10,7 @@ networks:
 services:
   fontys-automotive:
     container_name: fontys-automotive
-    image: lucjans26/fontys-automotive:latest
+    image: rick043/fontys-automotive:latest
     restart: unless-stopped
     environment:
       - PUID=${PUID}
