@@ -16,6 +16,9 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+    volumes:
+      - ${CONF_DIR}/rabbitmq/data:/var/lib/rabbitmq
+      - ${CONF_DIR}/rabbitmq/log:/var/log/rabbitmq
     networks:
       - traefik_proxy
     expose:
