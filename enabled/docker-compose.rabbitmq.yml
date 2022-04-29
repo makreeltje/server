@@ -24,9 +24,9 @@ services:
       - 5672:5672
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.applied-science.entrypoints=https"
-      - "traefik.http.routers.applied-science.rule=Host(`queue.$MEELSNET_DOMAIN`)"
-      - "traefik.http.routers.applied-science.tls=true"
-      - "traefik.http.routers.applied-science.middlewares=chain-no-auth@file"
-      - "traefik.http.routers.applied-science.service=applied-science"
-      - "traefik.http.services.applied-science.loadbalancer.server.port=15672"
+      - "traefik.http.routers.rabbitmq.entrypoints=https"
+      - "traefik.http.routers.rabbitmq.rule=Host(`queue.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.rabbitmq.tls=true"
+      - "traefik.http.routers.rabbitmq.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.rabbitmq.service=rabbitmq"
+      - "traefik.http.services.rabbitmq.loadbalancer.server.port=15672"
