@@ -19,8 +19,6 @@ services:
       - DOZZLE_LEVEL=info
       - DOZZLE_TAILSIZE=1000
       - DOZZLE_FILTER="name=ifontys"
-      - DOZZLE_USERNAME="logs"
-      - DOZZLE_PASSWORD="IFontysS6"
       # status=running
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
