@@ -18,7 +18,7 @@ services:
       - TZ=${TZ}
       - DOZZLE_LEVEL=info
       - DOZZLE_TAILSIZE=1000
-      - DOZZLE_FILTER="status=running,ifontys*"
+      - DOZZLE_FILTER="status=running,name=ifontys*"
       - DOZZLE_USERNAME="logs"
       - DOZZLE_PASSWORD="IFontysS6"
     volumes:
