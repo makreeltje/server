@@ -18,7 +18,9 @@ services:
       - TZ=${TZ}
       - DOZZLE_LEVEL=info
       - DOZZLE_TAILSIZE=1000
-      - DOZZLE_FILTER="status=running"
+      - DOZZLE_FILTER="status=running,ifontys*"
+      - DOZZLE_USERNAME="logs"
+      - DOZZLE_PASSWORD="IFontysS6"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -30,6 +32,6 @@ services:
       - "traefik.http.routers.dozzle.entrypoints=https"
       - "traefik.http.routers.dozzle.rule=Host(`dozzle.$MEELSNET_DOMAIN`) || Host(`logs.$MEELSNET_DOMAIN`)"
       - "traefik.http.routers.dozzle.tls=true"
-      - "traefik.http.routers.dozzle.middlewares=chain-oauth@file"
+      - "traefik.http.routers.dozzle.middlewares=chain-no-auth@file"
       - "traefik.http.routers.dozzle.service=dozzle"
       - "traefik.http.services.dozzle.loadbalancer.server.port=8080"
