@@ -28,7 +28,7 @@ services:
       - 8080
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.statping.entrypoints=https"
+      - "traefik.http.routers.statping.entrypoints=websecure"
       - "traefik.http.routers.statping.rule=Host(`status.$MEELSNET_DOMAIN`)"
       - "traefik.http.routers.statping.tls=true"
       - "traefik.http.routers.statping.middlewares=chain-no-auth@file"
