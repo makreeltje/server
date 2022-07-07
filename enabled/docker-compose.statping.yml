@@ -27,11 +27,12 @@ services:
     expose:
       - 8080
     ports:
-      - 8080:8080
+      - "8081:8080"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.statping.entrypoints=https"
       - "traefik.http.routers.statping.rule=Host(`status.$MEELSNET_DOMAIN`)"
+      - "traefik.http.routers.statping.tls=true"
       - "traefik.http.routers.statping.middlewares=chain-no-auth@file"
       - "traefik.http.routers.statping.service=statping"
       - "traefik.http.services.statping.loadbalancer.server.port=8080"
