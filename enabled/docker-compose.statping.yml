@@ -17,7 +17,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
       - DB_CONN=${DB_CONN}
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=192.168.1.254
       - DB_PORT=${DB_PORT}
       - DB_DATABASE=${DB_STATPING_DATABASE}
       - DB_USER=${DB_STATPING_USER}
