@@ -25,7 +25,7 @@ services:
     volumes:
       - ${CONF_DIR}/statping/app:/app
     expose:
-      - 8080:8080
+      - 8080
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.statping.entrypoints=https"
