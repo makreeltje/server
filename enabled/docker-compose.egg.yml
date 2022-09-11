@@ -9,7 +9,7 @@ networks:
 
 services:
   eggcontractor:
-    container_name: EggContractor
+    container_name: eggcontractor
     image: fanaticscripter/eggcontractor:latest
     restart: unless-stopped
     privileged: true
@@ -47,7 +47,7 @@ services:
   
   ofelia:
     image: mcuadros/ofelia:latest
-    container_name: EggContractor_sched
+    container_name: eggcontractor-scheduler
     restart: always
     depends_on:
       - eggcontractor
