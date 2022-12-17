@@ -8,7 +8,7 @@ networks:
     driver: bridge
 
 services:
-  grafana:
+  influxdb:
     container_name: influxdb
     image: influxdb:latest
     restart: unless-stopped
