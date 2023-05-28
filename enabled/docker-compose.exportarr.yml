@@ -49,8 +49,8 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - PORT=9708
-      - URL=http://sabnzbd:9696
+      - PORT=9712
+      - URL=http://sabnzbd:8080
       - APIKEY=${SABNZBD_API_KEY}
     networks:
       - traefik_proxy
