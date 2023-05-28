@@ -25,7 +25,7 @@ services:
     ports:
       - 9707:9707
   radarr-exportarr:
-    container_name: sonarr-exportarr
+    container_name: radarr-exportarr
     image: ghcr.io/onedr0p/exportarr:v1.0.0
     command: ["radarr"]
     restart: unless-stopped
