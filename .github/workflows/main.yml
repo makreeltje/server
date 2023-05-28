@@ -60,5 +60,7 @@ jobs:
           echo 'NEXTCLOUD_DB=${{ secrets.NEXTCLOUD_DB }}' >> .env
           echo 'NEXTCLOUD_USER=${{ secrets.NEXTCLOUD_USER }}' >> .env
           echo 'NEXTCLOUD_PASSWORD=${{ secrets.NEXTCLOUD_PASSWORD }}' >> .env
+          echo 'SONARR_API_KEY=${{ secrets.SONARR_API_KEY }}' >> .env
+          echo 'RADARR_API_KEY=${{ secrets.RADARR_API_KEY }}' >> .env
           
           docker-compose $(find docker-compose.*.yml | sed -e 's/^/-f /') up -d
